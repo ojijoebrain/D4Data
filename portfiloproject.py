@@ -4,18 +4,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-st.title('Dashboard 4 Data')
+st.title('Data Dashboard')
 sns.set_style('darkgrid')
 
 
-def load_data(path):
+def load_data():
     """ Load the dataset and returns a dataframe"""
-    df = pd.read_csv(path)
+    df = pd.read_csv("data/clean_auto_mpg.csv")
     return df
 
 
 # load dataset
-df = load_data('clean_auto_mpg.csv')
+df = load_data()
 int_columns = df.select_dtypes(
     ['float64', 'float32', 'int32', 'int64']).columns
 
