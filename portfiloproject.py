@@ -3,8 +3,20 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import io
+import matplotlib as mpl
 
-st.title('Data Dashboard')
+# Page Configuration
+st.set_page_config(
+    page_title="Data Driven Decisions Visualization App",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
+
+# Disable the toolbar for all plots
+mpl.rcParams['toolbar'] = 'none'
+
+
 sns.set_style('darkgrid')
 
 
@@ -12,6 +24,35 @@ def load_data():
     """ Load the dataset and returns a dataframe"""
     df = pd.read_csv("data/clean_auto_mpg.csv")
     return df
+
+df = load_data()
+int_columns = df.select_dtypes(['float64', 'float32', 'int32', 'int64']).columns
+
+
+# Sidebar
+st.sidebar.title("Navigation")
+options = st.sidebar.radio("Go to", ["Home", "Data Exploration", "Visualization"])
+
+# Home Page
+if options == "Home":
+    st.title("Data Driven Decisions Visualization App")
+    st.image("luke-chesser-JKUTrJ4vK00-unsplash.jpg", use_column_width=True)
+    st.write("This app allows you to visualize data and make data-driven decisions.")
+    
+    # Data Exploration
+elif options == "Data Exploration":
+    st.title("Data Exploration")
+    st.write("### Data Preview")
+    st.dataframe(df.head())
+
+    st.write("### Data Summary")
+    st.write(df.describe())
+
+    st.write("### Data Info")
+    buffer = io.StringIO()
+    df.info(buf=buffer)
+    s = buffer.getvalue()
+    st.text(s)
 
 
 # load dataset
