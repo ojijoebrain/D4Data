@@ -4,7 +4,7 @@ st.set_page_config(
     page_title='My Portfolio'
 )
 
-st.sidebar.success('MENU')
+st.sidebar.success('Menu')
 st.title('D4D')
 st.header('Dashboard For Data Driven Decisions')
 st.image("luke-chesser-JKUTrJ4vK00-unsplash.jpg", use_column_width=True)
